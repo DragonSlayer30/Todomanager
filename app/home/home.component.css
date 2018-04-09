@@ -1,0 +1,37 @@
+
+
+.task_desc p {
+    display: inline;
+}
+
+
+.task {
+    border: 1px #1B779E solid;
+    padding: 10px;
+
+}
+
+.task p, input {
+    display: inline;
+}
+
+.task input {
+    vertical-align: middle;
+}
+
+.title {
+    background-color: #1B779E;
+}
+
+.task_list {
+    margin: 10px; 
+}
+
+.strike {
+    text-decoration: line-through;
+}
+
+.due_class {
+    display: block !important;
+    padding: 0px;
+}

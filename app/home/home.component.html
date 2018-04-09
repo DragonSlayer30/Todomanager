@@ -1,0 +1,33 @@
+<thx-header></thx-header>
+
+<div class="container">
+        <div class="row">
+                        <div class="col">
+                                        <form>
+                                                        <div class="form-group">
+                                                          <input name="title" type="text" class="form-control" placeholder="Task Title" [(ngModel)]="task_title">
+                                                        </div>
+                                                        <div class="form-group">
+                                                          <input name="description"  type="text" class="form-control" placeholder="Task Description here " [(ngModel)]=task_description>
+                                                        </div>
+                                                        <div class="form-group" >
+                                                                <label for="example-datetime-local-input" class="col-form-label">Due Date</label>
+                                                                <input name="date" class="form-control" type="date" [(ngModel)]="task_due" >
+                                                        </div>
+                                                        <input type="submit" class="btn" value="Create Task" (click)="addTask()">
+                                                </form>
+                        </div>
+                        <div class="col">
+                        <p>Your List has {{ taskCount }} tasks</p>
+                                <div *ngFor="let task of tasks let i = index" class="task_list">
+                                        <div class="task">
+                                                        <input type="checkbox" [(ngModel)]="task.done" >
+                                                        <p [ngClass]="{'strike': task.done }" >{{ task.title }}</p>
+                                                        <i class="fas fa-trash-alt"></i>
+                                                        <p class="due_class" *ngIf="task.due != ''"> Due : {{ task.due}} </p>
+                                                        <p class="task_desc">{{task.description}}</p>
+                                        </div>
+                                </div>
+                                <input *ngIf="taskCount > 0" type="submit" class="btn" [(ngModel)]="update_task" (click)="updateTask()">        
+        </div>
+</div>
