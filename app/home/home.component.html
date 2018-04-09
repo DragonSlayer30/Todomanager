@@ -2,7 +2,7 @@
 
 <div class="container">
         <div class="row">
-                        <div class="col">
+                        <div class="col-md">
                                         <form>
                                                         <div class="form-group">
                                                           <input name="title" type="text" class="form-control" placeholder="Task Title" [(ngModel)]="task_title">
@@ -17,17 +17,34 @@
                                                         <input type="submit" class="btn" value="Create Task" (click)="addTask()">
                                                 </form>
                         </div>
-                        <div class="col">
+                        <div class="col-md">
                         <p>Your List has {{ taskCount }} tasks</p>
                                 <div *ngFor="let task of tasks let i = index" class="task_list">
                                         <div class="task">
-                                                        <input type="checkbox" [(ngModel)]="task.done" >
-                                                        <p [ngClass]="{'strike': task.done }" >{{ task.title }}</p>
-                                                        <i class="fas fa-trash-alt"></i>
+                                                <div *ngIf="task.edit != true"> 
+                                                        <input type="checkbox" [(ngModel)]="task.done" (click)="changeStatus(task)">
+                                                        <p class="title" [ngClass]="{'strike': task.done }" (click)="showDescription(task)">{{ task.title }}</p>
+                                                        <i class="material-icons icon_class" (click)="deleteTask(task, i)">delete_forever</i>
+                                                        <i class="material-icons icon_class" (click)="editTask(task)">mode_edit</i>
                                                         <p class="due_class" *ngIf="task.due != ''"> Due : {{ task.due}} </p>
-                                                        <p class="task_desc">{{task.description}}</p>
+                                                        <p class="task_desc" *ngIf="task.showDescription != ''">{{task.description}}</p></div>
+                                                <div *ngIf="task.edit == true"> 
+                                                        <div class="form-group">
+                                                                        <input name="title" type="text" class="form-control" placeholder="Task Title" [(ngModel)]="task.title">
+                                                                      </div>
+                                                                      <div class="form-group">
+                                                                        <input name="description"  type="text" class="form-control" placeholder="Task Description here " [(ngModel)]=task.description>
+                                                                      </div>
+                                                                      <div class="form-group" >
+                                                                              <label for="example-datetime-local-input" class="col-form-label">Due Date</label>
+                                                                              <input name="date" class="form-control" type="date" [(ngModel)]="task.dueValue" >
+                                                                      </div>
+                                                                      <input type="submit" class="btn" value="Update Task" (click)="updateEditTask(task)">
+                                                                      <input type="submit" class="btn" value="Cancel" (click)="cancelEditTask(task)"> 
+                                                </div>
+                                                        
                                         </div>
                                 </div>
-                                <input *ngIf="taskCount > 0" type="submit" class="btn" [(ngModel)]="update_task" (click)="updateTask()">        
+                                <input *ngIf="taskCount > 0" type="submit" class="btn" [(ngModel)]="update_task" (click)="updateTask()" style="margin:10px;">        
         </div>
 </div>
